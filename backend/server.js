@@ -8,6 +8,8 @@ import root from "./routes/root.js";
 
 import userRoutes from "./routes/userRoutes.js";
 import tournamentRoutes from './routes/tournamentRoutes.js';
+import divisionRoutes from './routes/divisionRoute.js';
+import gameRoutes from './routes/gameRoute.js';
 
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 import connectDB from "./config/db.js";
@@ -31,6 +33,8 @@ app.use("/", express.static(path.join(__dirname, "public")));
 app.use("/", root);
 app.use("/api/users", userRoutes);
 app.use("/api/tournaments", tournamentRoutes);
+app.use("/api/divisions", divisionRoutes);
+app.use("/api/games", gameRoutes)
 
 app.all("*", (req, res) => {
   res.status(404);

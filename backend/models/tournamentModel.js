@@ -6,6 +6,10 @@ const tournamentSchema = mongoose.Schema({
         required: [true, "tournament name is required"],
         unique: true
     },
+    description: {
+        type: String,
+        required: [true, "Description text is required"]
+    },
     divisions: [],
     winners: [],
     deleted: {type: Boolean, default: false},

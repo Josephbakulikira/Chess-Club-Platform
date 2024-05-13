@@ -41,6 +41,26 @@ const isAdmin = asyncHandler ( async (req, res, next) => {
       throw new Error("Not authorized, No token");
     }
   }
+});
+
+const isMember = asyncHandler ( async (req, res, next) => {
+  let token;
+  token = req.cookies.jwt || null;
+  if(token){
+    try{
+      const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
+      const user = await User.findById(decoded.userId)
+      if(user?.role === "member" || user?.role === "dev"){
+        next()
+      }else{
+        res.status(401);
+        throw new Error("No Access, Don't have the permission")
+      }
+    }catch(error){
+      res.status(401);
+      throw new Error("Not authorized, No token");
+    }
+  }
 })
 
-export { protect, isAdmin };
+export { protect, isAdmin, isMember };

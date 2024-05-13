@@ -15,6 +15,7 @@ router.post("/auth", authUser);
 router.post("/register", registerUser);
 router.post("/logout", logoutUser);
 router.post("/role", isAdmin, updateUserRole)
+
 router
   .route("/profile")
   .get(protect, getUserProfile)

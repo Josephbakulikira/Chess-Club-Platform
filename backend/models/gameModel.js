@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const matchSchema = mongoose.Schema({
+const gameSchema = mongoose.Schema({
     player1: {
         type: mongoose.Schema.Types.ObjectId,
         required: [true, "player 1 Id is required!"]
@@ -15,12 +15,7 @@ const matchSchema = mongoose.Schema({
     },
     deleted: {type: Boolean, default: false},
     // player two validate a game
-    validation1: {
-        type: Boolean,
-        default: false
-    },
-    // player one validate a game
-    validation2: {
+    isplayed: {
         type: Boolean,
         default: false
     },
@@ -28,12 +23,28 @@ const matchSchema = mongoose.Schema({
         type: Date
     },
     gameLinks: [],
+
     score: {
         type: String,
         defeault: "0-0"
+    },
+    divisionId: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: [true, "Division Id is required"]
+    },
+    tournamentId: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: [true, "Tournament Id is required"]
+    },
+    userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: [true, "User id is required"]
+    },
+    updatedBy: {
+        type: mongoose.Schema.Types.ObjectId,
     }
 }, {timestamps: true});
 
-const Match = mongoose.model("Match", matchSchema);
+const Game = mongoose.model("Game", gameSchema);
 
-export default Match;
+export default Game;
